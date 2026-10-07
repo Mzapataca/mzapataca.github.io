@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Funnel para Roger García</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F6FC; --surface:#FFFFFF; --ink:#14223A; --muted:#55627A; --line:#D9E3F1;
+  --plum:#1E5BB8; --plum-soft:#E1ECFB; --sage:#4F7A5E; --sage-soft:#E5EFE8; --warn:#9A4B12;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1724; --surface:#172235; --ink:#EAF0FA; --muted:#A6B4CB; --line:#26354D;
+    --plum:#7FB0F5; --plum-soft:#1C3456; --sage:#9CCBAA; --sage-soft:#22352A; --warn:#E3A36E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1724; --surface:#172235; --ink:#EAF0FA; --muted:#A6B4CB; --line:#26354D;
+  --plum:#7FB0F5; --plum-soft:#1C3456; --sage:#9CCBAA; --sage-soft:#22352A; --warn:#E3A36E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Figtree",system-ui,sans-serif;line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4.6vw,3.1rem);font-weight:800}
+h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+h4{font-size:1.05rem;font-weight:700}
+p{margin:0 0 1em}
+a{color:var(--plum)}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--plum);outline-offset:3px;border-radius:6px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:40px;font-size:.92rem;color:var(--muted)}
+.who{display:flex;align-items:center;gap:10px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--plum);color:#fff;display:grid;place-items:center;font-weight:700;font-family:"Bricolage Grotesque",sans-serif;flex:none}
+:root[data-theme="dark"] .avatar{color:#0F1724}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .avatar{color:#0F1724}}
+.avatar.lg{width:72px;height:72px;font-size:1.5rem}
+.lead{font-size:1.12rem;color:var(--muted);max-width:62ch}
+.kicker{color:var(--plum);font-weight:600;font-size:.95rem;margin-bottom:.6em;display:block}
+.section-head{margin:56px 0 20px}
+.cards{display:grid;gap:14px}
+.card{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;text-decoration:none;color:inherit;transition:border-color .15s}
+.card:hover{border-color:var(--plum)}
+.card .num{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.5rem;color:var(--plum);grid-row:span 3;line-height:1}
+.card h3{margin:0}
+.card p{margin:0;color:var(--muted)}
+.card .go{font-weight:600;color:var(--plum);margin-top:6px}
+.tag{font-family:"Figtree",sans-serif;font-weight:600;font-size:.78em;color:var(--warn);white-space:nowrap}
+.btn{display:inline-block;background:var(--plum);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:999px;border:0;font-size:1rem;cursor:pointer}
+:root[data-theme="dark"] .btn{color:#0F1724}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0F1724}}
+.cta{margin-top:44px;text-align:center}
+.cta p{color:var(--muted);margin-top:12px}
+.fine{font-size:.82rem;color:var(--muted);margin-top:48px;border-top:1px solid var(--line);padding-top:20px}
+.back{display:inline-block;margin-bottom:28px;font-weight:600;text-decoration:none;cursor:pointer;background:none;border:0;color:var(--plum);font-size:1rem;padding:0}
+.view{display:none}
+.view.active{display:block}
+
+/* Webinar */
+.date{font-weight:600;margin:18px 0}
+.count{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 22px}
+.count div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:78px;text-align:center}
+.count b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.8rem;line-height:1}
+.count span{font-size:.8rem;color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted);margin-top:10px}
+.checks{list-style:none;padding:0;margin:0}
+.checks li{padding:12px 0 12px 32px;border-bottom:1px solid var(--line);position:relative}
+.checks li::before{content:"✓";position:absolute;left:4px;top:12px;color:var(--sage);font-weight:700}
+.presenter{display:flex;gap:18px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:36px}
+.presenter small{color:var(--muted);display:block;margin-bottom:8px}
+
+/* Video placeholders */
+.video{aspect-ratio:16/9;background:var(--plum-soft);border-radius:12px;display:grid;place-items:center;color:var(--plum);font-weight:600;text-align:center;padding:16px}
+.video .play{font-size:2rem;display:block}
+.vids{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:18px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.vid .video{border-radius:0}
+.vid div.body{padding:16px 18px}
+.vid small{color:var(--plum);font-weight:600}
+.vid p{color:var(--muted);font-size:.95rem;margin:0}
+
+/* Flow */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 0 28px}
+.flow span{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-weight:600;font-size:.92rem}
+.flow i{color:var(--muted);font-style:normal}
+.flow span.end{background:var(--sage-soft);border-color:transparent;color:var(--sage)}
+
+/* Desplegables */
+details.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+details.step[open]{border-color:var(--plum)}
+details.step summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px 20px}
+details.step summary::-webkit-details-marker{display:none}
+.snum{width:34px;height:34px;border-radius:50%;background:var(--plum-soft);color:var(--plum);display:grid;place-items:center;font-weight:800;font-family:"Bricolage Grotesque",sans-serif}
+.stitle b{display:block;font-size:1.05rem}
+.stitle span{color:var(--muted);font-size:.93rem}
+.chev{transition:transform .2s;color:var(--muted);font-size:1.1rem}
+details[open] > summary .chev{transform:rotate(180deg)}
+.sbody{padding:0 20px 20px 70px}
+@media (max-width:560px){.sbody{padding:0 18px 18px}}
+.sbody ul{padding-left:1.2em;margin:0 0 1em}
+.sbody li{margin-bottom:6px}
+.callout{background:var(--sage-soft);border-radius:10px;padding:14px 16px;margin:14px 0}
+.script{border-left:3px solid var(--plum);padding:4px 0 4px 14px;margin:12px 0}
+.script b{display:block;font-size:.9rem;color:var(--plum)}
+.script p{margin:0;font-style:italic}
+.shapes{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0}
+.shapes div{background:var(--bg);border-radius:10px;padding:14px}
+figure{margin:16px 0}
+.shot{border:1px dashed var(--line);border-radius:10px;padding:28px 16px;text-align:center;color:var(--muted);background:var(--bg);font-size:.92rem}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:6px;font-style:italic}
+.empty{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:18px;color:var(--muted);text-align:center}
+
+/* ICP */
+.icp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:14px}
+.icp h4{color:var(--plum)}
+.icp p:last-child,.icp ul:last-child{margin-bottom:0}
+.icp ul{padding-left:1.2em}
+.icp li{margin-bottom:6px}
+.icp li.avoid{color:var(--warn)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.stats span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<section class="view active" id="resumen">
+  <div class="topbar"><span>Creado por Mario</span><span class="who"><span class="avatar">RG</span>Exclusivo para Roger García</span></div>
+  <h1>Roger, he estudiado tu contenido y tu oferta. Aquí tienes tu estrategia para el Q4.</h1>
+  <p class="lead">No tienes que instalar ni pagar nada. Todas las páginas, correos e ideas de vídeo que verás aquí parten de <strong>tu contenido actual, tu oferta y tu audiencia.</strong></p>
+  <div class="icp" style="margin-top:28px"><h4>Por qué ahora: el Q4</h4><p>Los últimos meses del año son la temporada con más compras: Black Friday, Navidad y las rebajas. Es la oportunidad de terminar el año de la mejor manera.</p><p>Y además, a final de año la gente hace balance. Mira lo que ha conseguido y lo que no, y decide qué quiere cambiar el año que viene. Es cuando más personas se plantean empezar algo propio.</p><p>Si el funnel está listo ahora, aprovechas las dos cosas: las ventas del Q4 y a quien quiere empezar 2027 con su propio negocio.</p></div>
+  <div class="section-head"><span class="kicker">Entregables</span><h2>Esto es lo que he montado para ti</h2>
+  <p class="lead">Puedes abrirlas todas. Son páginas que funcionan, no maquetas, y te las quedas trabajemos juntos o no.</p></div>
+  <div class="cards">
+    <a class="card" href="#registro"><span class="num">01</span><h3>Página de registro al webinar</h3><p>La página a la que llega tu audiencia para reservar su plaza en el entrenamiento en directo: promesa, cuenta atrás, lo que van a aprender y quién lo imparte.</p><span class="go">Ver página de registro ›</span></a>
+    <a class="card" href="#confirmacion"><span class="num">02</span><h3>Página de confirmación de registro</h3><p>Donde aterrizan tras registrarse. Vídeos gratuitos para que se acostumbren a verte, con pruebas y respuestas a sus dudas antes del directo.</p><span class="go">Ver página de confirmación ›</span></a>
+    <a class="card" href="#correos"><span class="num">03</span><h3>Secuencia de calentamiento de 7 días</h3><p>El correo de confirmación que se envía en cuanto se registran y, después, un correo al día durante los 7 días previos al directo. Les presenta la oportunidad, te presenta como el mentor y hace que lleguen puntuales.</p><span class="go">Leer los correos ›</span></a>
+    <a class="card" href="#contenido"><span class="num">04</span><h3>Plan de contenido de 30 días</h3><p>Ideas de vídeo para los próximos 30 días, repartidas entre top, middle y bottom funnel. Basadas en los títulos que ya están funcionando en tu nicho.</p><span class="go">Ver plan de contenido ›</span></a>
+    <a class="card" href="#youtube"><span class="num">06</span><h3>Plan de crecimiento en YouTube</h3><p>Diez vídeos al mes, cómo se enlazan entre sí y cuándo subirlos para que cada vídeo lleve al registro.</p><span class="go">Ver el plan de crecimiento ›</span></a>
+    <a class="card" href="#anuncios"><span class="num">07</span><h3>Anuncios de pago: funnel de webinar</h3><p>La configuración exacta de campaña, conjunto de anuncios y píxel en Meta, veinte creatividades entre vídeo y estáticas, y las referencias de asistencia y repetición.</p><span class="go">Ver el plan de anuncios ›</span></a>
+    <a class="card" href="#icp"><span class="num">08</span><h3>Investigación del cliente ideal (ICP)</h3><p>Todo lo que he recopilado sobre tu audiencia antes de escribir una sola palabra. A quién ayudas, qué problema resuelves, tu promesa, tus pruebas y tu método. Úsalo para afinar cada guion y correo que escribas a partir de ahora.</p><span class="go">Ver la investigación ›</span></a>
+  </div>
+  <div class="cta"><a class="btn" href="https://calendly.com/marioz-beklix/30min" target="_blank" rel="noopener">Reserva una llamada conmigo</a>
+  <p>Veinte minutos. Te enseño todo lo que he montado y te lo quedas pase lo que pase.</p><p class="note">Si el botón no se abre, copia este enlace: <span class="copy" style="user-select:all;word-break:break-all;color:var(--plum);font-weight:600">https://calendly.com/marioz-beklix/30min</span></p></div>
+  <p class="fine">Las cifras mencionadas corresponden a las personas citadas y no garantizan resultados. Este sitio no forma parte de Meta Platforms, Inc. ni de Google LLC, ni cuenta con su respaldo.</p>
+</section>
+<section class="view" id="registro">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Entrenamiento en directo y gratuito de Socios Ecom</span>
+  <h1>Cómo lanzar tu tienda online creada con IA en menos de 10 minutos y conseguir tus primeras ventas sin conocimientos técnicos ni comprar stock</h1>
+  <p class="lead">En esta sesión en directo te enseño cómo pasar de la tienda que te crea la IA a una tienda que vende: qué productos activar, cómo atraer tráfico y qué hacer la primera semana. Termina el año con tu tienda en marcha y empieza 2027 con algo propio.</p>
+  <p class="date">Próximo jueves · 20:00 (hora peninsular española)</p>
+  <div class="count" aria-label="Cuenta atrás">
+    <div><b data-c="d">00</b><span>Días</span></div><div><b data-c="h">00</b><span>Horas</span></div>
+    <div><b data-c="m">00</b><span>Minutos</span></div><div><b data-c="s">00</b><span>Segundos</span></div>
+  </div>
+  <a class="btn" href="https://tiendagratis.sociosecom.com/untitled-page-page" target="_blank" rel="noopener">Reservar mi plaza gratuita ›</a>
+  <p class="note">No habrá grabación. Conéctate en directo o te lo pierdes.</p>
+  <div class="section-head"><h2>Lo que vas a aprender en la sesión</h2><p>En esta sesión en directo y gratuita verás el proceso completo para poner en marcha tu e-commerce sin programar, sin diseñar y sin inventario.</p></div>
+  <ul class="checks">
+    <li>Por qué el final de año es el mejor momento para empezar: lo que se mueve en el Q4 y cómo llegar a enero con tu tienda ya funcionando</li>
+    <li>Cómo la IA construye tu tienda completa en menos de 10 minutos, con diseño profesional y proveedores conectados</li>
+    <li>Por qué el modelo sin stock te permite empezar con muy poca inversión: el cliente paga primero y el proveedor se encarga del envío</li>
+    <li>Cómo elegir entre los productos en tendencia los que tienen más margen y menos competencia</li>
+    <li>Las dos vías para conseguir ventas, anuncios en Facebook y tráfico orgánico, y cuál te conviene según tu presupuesto</li>
+    <li>Los primeros pasos exactos para tu primera semana con la tienda en marcha</li>
+  </ul>
+  <div class="presenter"><span class="avatar lg">RG</span><div><h4>Roger García</h4><small>Tu ponente</small><p>Roger García está detrás de Socios Ecom. Según su canal, sus tiendas generan más de 300.000 € al mes y retiró a sus padres y a su mujer en 14 meses. Su landing ofrece una tienda creada con IA en menos de 10 minutos y un curso gratis.</p></div></div>
+</section>
+<section class="view" id="confirmacion">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Ya estás registrado</span>
+  <h1>Ya tienes tu plaza para el entrenamiento en directo</h1>
+  <p class="lead">Añádelo ahora a tu calendario para no perdértelo y mira los vídeos de abajo antes de que empecemos. No habrá grabación.</p>
+  <p class="date">Próximo jueves · 20:00 (hora peninsular española)</p>
+  <div class="video"><div><span class="play">►</span>Vídeo de bienvenida (por grabar)<br><small style="font-weight:400">Dos minutos. De qué va el directo y qué conviene tener preparado.</small></div></div>
+  <p style="margin-top:18px"><a class="btn" href="#confirmacion">Añadir el entrenamiento a mi calendario</a></p>
+  <div class="section-head"><span class="kicker">Mientras esperas</span><h2>Mira estos vídeos antes del directo</h2>
+  <p class="lead">Quien ve al menos uno de estos vídeos tiene casi el doble de probabilidades de conectarse al directo.</p></div>
+  <div class="vids">
+    <div class="vid"><div class="video"><span class="play">►</span></div><div class="body"><small>Formación gratuita 01</small><h4>Crea tu tienda online con IA en menos de 10 minutos</h4><p>El proceso completo en directo: verificar el correo, elegir nicho y reclamar una tienda lista para recibir pagos.</p></div></div>
+    <div class="vid"><div class="video"><span class="play">►</span></div><div class="body"><small>Formación gratuita 02</small><h4>Cómo elegir productos ganadores sin comprar stock</h4><p>Los criterios para quedarte con los productos con más margen y demanda dentro de tu catálogo.</p></div></div>
+    <div class="vid"><div class="video"><span class="play">►</span></div><div class="body"><small>Formación gratuita 03</small><h4>Tus primeras ventas: anuncios o tráfico orgánico</h4><p>Las dos vías para atraer clientes a tu tienda y cómo decidir por cuál empezar.</p></div></div>
+  </div>
+</section>
+<section class="view" id="correos">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">3 secuencias, 16 correos</span>
+  <h1>Secuencia de calentamiento del webinar</h1>
+  <p class="lead">El calentamiento envía un correo al día durante los 7 días entre el registro y el directo. Más abajo están también la secuencia para quien descarga el recurso gratuito y la de quien no se presenta a la llamada. Cada correo tiene un objetivo concreto y lleva indicado el día en que se envía.</p>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Calentamiento del webinar</b><span>Confirmación + 7 días hasta el directo</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="empty">Contenido de los correos por añadir.</div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Seguimiento del recurso gratuito</b><span>Para quien descarga el recurso gratuito</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="empty">Contenido de los correos por añadir.</div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Recuperar a quien no se presenta a la llamada</b><span>Para quien reserva una llamada y no se presenta</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="empty">Contenido de los correos por añadir.</div></div>
+  </details>
+</section>
+<section class="view" id="contenido">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Próximos 30 días</span>
+  <h1>Plan de contenido de 30 días</h1>
+  <p class="lead">Seis vídeos en cuatro semanas, en YouTube: vídeos largos y Shorts. Los tres primeros traen gente nueva que empieza de cero. Los dos siguientes demuestran que tu método funciona. El último convierte. Tu landing pierde confianza justo donde pide el email. Este plan responde a la duda de «¿cómo puede ser gratis?» antes de que llegue a la página.</p>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Top funnel: que te descubran</b><span>3 piezas para traer gente nueva</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="piece"><b>«Te creo una tienda con IA en 10 minutos. Gratis. Y te cuento cómo gano yo con eso»</b><span class="fmt">YouTube Short de 30 s</span><p>La tienda generándose, cómo ganas tú (lo mismo que ya dice tu landing) y la tienda terminada.</p><p class="cta"><strong>Llamada a la acción:</strong> enlace a la tienda gratis.</p></div><div class="piece"><b>«El dropshipping está muerto. El de 2022»</b><span class="fmt">YouTube Short de 30 s</span><p>Tres cosas que ya no funcionan y lo que funciona hoy.</p><p class="cta"><strong>Llamada a la acción:</strong> «La versión larga está en mi canal».</p></div><div class="piece"><b>«Si tienes 18 años y 300 €, no te compres un curso. Haz esto primero»</b><span class="fmt">YouTube Short de 30 s</span><p>A qué destinar esos 300 € antes de pagar nada.</p><p class="cta"><strong>Llamada a la acción:</strong> ninguna.</p></div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Middle funnel: que confíen en ti</b><span>2 piezas para demostrar tu método</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="piece"><b>«Dropshipping orgánico con IA, con números: lo que cuesta un vídeo, lo que da y lo que te queda»</b><span class="fmt">Vídeo largo de YouTube, unos 20 min</span><p>Herramientas al mes, coste por vídeo, vistas, clics, conversión y margen.</p><p class="cta"><strong>Llamada a la acción:</strong> tienda gratis.</p></div><div class="piece"><b>«Cómo sé en 48 horas si un producto merece la pena»</b><span class="fmt">YouTube Short de 30 s</span><p>Tu umbral de vistas, clics y carritos, con un producto que descartaste y uno que escaló.</p><p class="cta"><strong>Llamada a la acción:</strong> palabra clave por DM.</p></div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Bottom funnel: que te compren</b><span>1 pieza para convertir</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="piece"><b>«¿Esto es una estafa? Te respondo con las cuentas de mis alumnos»</b><span class="fmt">Vídeo largo de YouTube, unos 15 min, y un Short</span><p>La duda con comentarios reales, cómo detectarías una estafa, las cuentas de tres alumnos y lo que no garantizas.</p><p class="cta"><strong>Llamada a la acción:</strong> consultoría.</p></div></div>
+  </details>
+  <div class="icp"><h4>Calendario</h4><div style="overflow-x:auto"><table class="cal"><tr><th>Semana</th><th>Qué sale</th></tr><tr><td>1</td><td>Shorts 1 y 2</td></tr><tr><td>2</td><td>Short 3 y vídeo largo 4</td></tr><tr><td>3</td><td>Short 5</td></tr><tr><td>4</td><td>Vídeo largo 6</td></tr></table></div></div>
+  <div class="icp"><h4>Qué miras tú</h4><p>Emails captados, tiendas creadas y consultorías cerradas desde el funnel.</p></div>
+  <p class="note">Donde pone [CIFRA REAL] o [N REAL] va un dato de tu panel. Si no existe, ese vídeo no se publica.</p>
+<style>.piece{border-top:1px solid var(--line);padding:14px 0}.piece:first-child{border-top:0;padding-top:0}.piece b{display:block;font-size:1.02rem}.piece .fmt{display:block;color:var(--plum);font-weight:600;font-size:.9rem;margin:2px 0 8px}.piece p{margin:0 0 6px}.piece .cta{color:var(--muted);font-size:.93rem}table.cal{border-collapse:collapse;width:100%}table.cal th,table.cal td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}table.cal th{color:var(--muted);font-weight:600;font-size:.9rem}</style>
+</section>
+<section class="view" id="youtube">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Plan de crecimiento en YouTube</span>
+  <h1>Cómo hacerlo crecer</h1>
+  <p class="lead">Diez vídeos al mes, enlazados en cadena hasta la página de registro. Esto es lo que ponemos en marcha cuando el funnel esté activo.</p>
+  <div class="flow"><span>Contenido en YouTube</span><i>→</i><span>Página de registro</span><i>→</i><span>Webinar en directo</span><i>→</i><span class="end">Venta de la ayuda avanzada para escalar</span></div>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Publica 10 vídeos al mes</b><span>6 de top funnel, 3 de middle funnel y 1 de bottom funnel</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul>
+      <li><strong>6 de top funnel.</strong> Tus resultados personales y la tienda online creada con IA en menos de 10 minutos, con 20 productos en tendencia y los proveedores ya conectados. Te presentan como mentor y dan a conocer la oportunidad</li>
+      <li><strong>3 de middle funnel.</strong> Los errores que comete la gente y las nuevas estrategias que los solucionan</li>
+      <li><strong>1 de bottom funnel al mes.</strong> Resultados de alumnos y casos de éxito</li></ul></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Enlaza los vídeos en cadena</b><span>Que todos lleven a algún sitio</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul>
+      <li>Cada vídeo de <strong>top funnel</strong> enlaza a tu vídeo de middle funnel que mejor convierte</li>
+      <li>Cada vídeo de <strong>middle y bottom funnel</strong> enlaza directamente a la página de registro del webinar: <strong style="word-break:break-all">https://tiendagratis.sociosecom.com/untitled-page-page</strong></li>
+      <li>Pon ese mismo enlace en la <strong>sección «Más información» de tu canal de YouTube</strong></li></ul></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Sube entre las 18:00 y las 22:00 (hora peninsular española)</b><span>Importa la calidad de los contactos, no solo las visualizaciones</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Publicar en esa franja hace que el vídeo salga cuando tu audiencia en España tiene tiempo para verlo. Así consigues contactos más interesados y menos visualizaciones de gente de paso, que inflan los números pero no reservan.</p></div>
+  </details>
+</section>
+<section class="view" id="anuncios">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Anuncios de pago, funnel de webinar</span>
+  <h1>Anuncios de pago</h1>
+  <p class="lead">Cuando el funnel ya funcione sin anuncios, así es como llenas el directo cuando quieras: anuncios de Meta que llevan directamente al registro.</p>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Campaña y presupuesto</b><span>ABO, objetivo de clientes potenciales, Advantage+ activado</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Aquí lo que buscas son registros, así que el píxel hace el trabajo y Advantage+ ayuda en vez de estorbar.</p>
+      <ul><li>Campaña ABO en el Administrador de anuncios de Meta</li><li>Objetivo: <strong>clientes potenciales</strong></li><li>Segmentación Advantage+ <strong>ACTIVADA</strong></li><li>Empieza con <strong>100 $ al día</strong></li></ul>
+      <figure><div class="shot">Captura de pantalla de la configuración de campaña</div><figcaption>Campaña ABO, objetivo de clientes potenciales, Advantage+ activado</figcaption></figure></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Conjunto de anuncios</b><span>Visitas al sitio web, optimizado para la conversión de registro</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Selecciona tu píxel y optimiza para una <strong>conversión personalizada</strong> de registros al webinar. Objetivo: <strong>entre 5 $ y 20 $ por lead del webinar</strong>.</p>
+      <ul><li>La segmentación Advantage+ se queda <strong>ACTIVADA</strong> también aquí</li><li>Intereses relacionados con tu mercado, <strong>un interés por conjunto de anuncios</strong></li></ul>
+      <figure><div class="shot">Captura de pantalla de la configuración del conjunto de anuncios</div><figcaption>Conjunto de anuncios optimizado para la conversión personalizada de registro al webinar</figcaption></figure></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Creatividades</b><span>Veinte por conjunto de anuncios, repartidas a partes iguales</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul><li><strong>Diez anuncios en vídeo.</strong> Graba en 9:16 vertical para Instagram y en 16:9 panorámico para Facebook. Cada uno o bien presenta una nueva oportunidad o hueco en el mercado sobre el que hay que actuar rápido, o bien señala un error habitual de tu cliente ideal y adelanta la nueva solución</li>
+      <li><strong>Diez anuncios de imagen estática.</strong> Créalos con herramientas de IA como Google AI Studio. Prepara varios formatos: 1:1 cuadrado y 9:16 vertical</li></ul>
+      <p>Todos los anuncios buscan lo mismo: <strong>que hagan clic y se registren en el webinar</strong>.</p></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">4</span><span class="stitle"><b>Que no se escape nadie</b><span>Dos automatizaciones listas antes de gastar en anuncios</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul><li>La secuencia de bienvenida se activa con el registro y dura hasta la sesión. Apunta a una <strong>tasa de asistencia del 20 al 30 %</strong>, que es lo habitual en el sector. Si lo superas, mejor que mejor</li>
+      <li>El <strong>funnel de la grabación</strong> ya está montado, así que se encarga de vender a quienes no asistieron y a quienes asistieron pero no compraron</li></ul>
+      <p>Página de registro: <strong style="word-break:break-all">https://tiendagratis.sociosecom.com/untitled-page-page</strong></p></div>
+  </details>
+</section>
+<section class="view" id="icp">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Sacado de tu perfil y tu funnel</span>
+  <h1>Lo que he aprendido de tu audiencia</h1>
+  <p class="lead">Todas las páginas y correos parten de aquí. Si algo de lo que hay abajo no es correcto, dímelo y rehago los textos con la corrección.</p>
+  <div class="icp"><h4>Quién te compra</h4><p>Son personas que quieren empezar un negocio online desde casa con poca inversión. No tienen conocimientos técnicos ni experiencia en e-commerce, y les frena no saber montar una tienda ni encontrar proveedores.</p></div>
+  <div class="icp"><h4>Su mayor problema</h4><p>Les abruma todo lo que hay que hacer antes de vender: diseñar la tienda, buscar productos, conectar proveedores, configurar pagos. Muchos ya lo intentaron y se quedaron atascados en la parte técnica antes de la primera venta.</p></div>
+  <div class="icp"><h4>Por lo que están dispuestos a pagar</h4><p>Quieren tener una tienda profesional funcionando ya, con productos que se venden, y saber exactamente qué hacer para conseguir las primeras ventas sin arriesgar dinero en stock.</p></div>
+  <div class="icp"><h4>Qué tienes que enseñar para que te compren</h4><ul><li>Muestra tiendas reales creadas por la IA y lo rápido que se generan</li><li>Enseña reseñas y casos de éxito de alumnos</li><li>Explica con transparencia cómo es posible que la tienda sea gratis</li><li>Muestra el temario del curso y las herramientas incluidas</li><li class="avoid">Evitar: dar a entender que la tienda vende sola sin trabajo</li><li class="avoid">Evitar: usar urgencia falsa que reste credibilidad</li></ul></div>
+  <div class="icp"><h4>Lo que les cuesta intentarlo por su cuenta</h4><p>Por su cuenta suelen gastar semanas y dinero en plantillas, aplicaciones y productos que no venden, y abandonan antes de entender cómo atraer tráfico. El problema no es la tienda, es no tener un sistema para venderla.</p></div>
+  <div class="stats"><span>Su página de captación</span><span>Su canal de YouTube</span></div>
+</section>
+<p class="fine"><strong>Aviso sobre ingresos.</strong> Los resultados mostrados no son lo habitual ni garantizan resultados futuros. Cualquier cifra mencionada corresponde a las personas citadas y depende del esfuerzo, el capital, la experiencia y las condiciones del mercado. Nada de lo aquí expuesto constituye asesoramiento financiero.<br><br>Este sitio no forma parte del sitio web de Facebook ni de Meta Platforms, Inc., ni cuenta con su respaldo. Facebook e Instagram son marcas registradas de Meta Platforms, Inc. Este sitio no forma parte de Google LLC ni de YouTube, ni cuenta con su respaldo. Google y YouTube son marcas registradas de Google LLC.<br><br>Creado para Roger García</p>
+</div>
+<script>
+(function(){
+  var ids=["resumen", "registro", "confirmacion", "correos", "contenido", "youtube", "anuncios", "icp"];
+  function show(){var id=(location.hash||"#resumen").slice(1);if(ids.indexOf(id)<0)id="resumen";
+    ids.forEach(function(v){document.getElementById(v).classList.toggle("active",v===id)});window.scrollTo(0,0);}
+  window.addEventListener("hashchange",show);show();
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="http"]');if(!a)return;e.preventDefault();var u=a.href,w=null;
+    try{w=window.open(u,"_blank","noopener");}catch(x){}
+    if(!w){try{window.top.location.href=u;}catch(x){try{location.href=u;}catch(y){}}}});
+  function mp(ms){var p={};new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",weekday:"short",hour12:false}).formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value});return p;}
+  function off(ms){var p=mp(ms);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour%24,+p.minute,+p.second)-Math.floor(ms/1000)*1000;}
+  function target(){var now=Date.now(),p=mp(now),wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday],add=(4-wd+7)%7;
+    var l=Date.UTC(+p.year,+p.month-1,+p.day+add,20,0,0),t=l-off(l);
+    if(t<=now){l=Date.UTC(+p.year,+p.month-1,+p.day+add+7,20,0,0);t=l-off(l);}return t;}
+  var end=target(),els={};["d","h","m","s"].forEach(function(k){els[k]=document.querySelector('[data-c="'+k+'"]')});
+  function pad(n){return String(n).padStart(2,"0")}
+  function tick(){if(!els.d)return;var r=end-Date.now();if(r<=0){end=target();r=end-Date.now();}var s=Math.floor(r/1000);
+    els.d.textContent=pad(Math.floor(s/86400));els.h.textContent=pad(Math.floor(s%86400/3600));
+    els.m.textContent=pad(Math.floor(s%3600/60));els.s.textContent=pad(s%60);}
+  tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
