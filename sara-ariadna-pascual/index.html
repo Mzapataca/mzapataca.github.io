@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Funnel para Sara Ariadna Pascual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F0E8; --surface:#FFFCF8; --ink:#2E2219; --muted:#6E5C4C; --line:#E8DACB;
+  --plum:#8E623F; --plum-soft:#EFDFCD; --sage:#4F7A5E; --sage-soft:#E5EFE8; --warn:#9A4B12;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1C1611; --surface:#271F18; --ink:#F4ECE3; --muted:#BFAE9C; --line:#3A2E24;
+    --plum:#D8AE88; --plum-soft:#3E2F22; --sage:#9CCBAA; --sage-soft:#22352A; --warn:#E3A36E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1C1611; --surface:#271F18; --ink:#F4ECE3; --muted:#BFAE9C; --line:#3A2E24;
+  --plum:#D8AE88; --plum-soft:#3E2F22; --sage:#9CCBAA; --sage-soft:#22352A; --warn:#E3A36E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Figtree",system-ui,sans-serif;line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4.6vw,3.1rem);font-weight:800}
+h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+h4{font-size:1.05rem;font-weight:700}
+p{margin:0 0 1em}
+a{color:var(--plum)}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--plum);outline-offset:3px;border-radius:6px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:40px;font-size:.92rem;color:var(--muted)}
+.who{display:flex;align-items:center;gap:10px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--plum);color:#fff;display:grid;place-items:center;font-weight:700;font-family:"Bricolage Grotesque",sans-serif;flex:none}
+:root[data-theme="dark"] .avatar{color:#1C1611}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .avatar{color:#1C1611}}
+.avatar.lg{width:72px;height:72px;font-size:1.5rem}
+.lead{font-size:1.12rem;color:var(--muted);max-width:62ch}
+.kicker{color:var(--plum);font-weight:600;font-size:.95rem;margin-bottom:.6em;display:block}
+.section-head{margin:56px 0 20px}
+.cards{display:grid;gap:14px}
+.card{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;text-decoration:none;color:inherit;transition:border-color .15s}
+.card:hover{border-color:var(--plum)}
+.card .num{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.5rem;color:var(--plum);grid-row:span 3;line-height:1}
+.card h3{margin:0}
+.card p{margin:0;color:var(--muted)}
+.card .go{font-weight:600;color:var(--plum);margin-top:6px}
+.tag{font-family:"Figtree",sans-serif;font-weight:600;font-size:.78em;color:var(--warn);white-space:nowrap}
+.btn{display:inline-block;background:var(--plum);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:999px;border:0;font-size:1rem;cursor:pointer}
+:root[data-theme="dark"] .btn{color:#1C1611}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#1C1611}}
+.cta{margin-top:44px;text-align:center}
+.cta p{color:var(--muted);margin-top:12px}
+.fine{font-size:.82rem;color:var(--muted);margin-top:48px;border-top:1px solid var(--line);padding-top:20px}
+.back{display:inline-block;margin-bottom:28px;font-weight:600;text-decoration:none;cursor:pointer;background:none;border:0;color:var(--plum);font-size:1rem;padding:0}
+.view{display:none}
+.view.active{display:block}
+
+/* Webinar */
+.date{font-weight:600;margin:18px 0}
+.count{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 22px}
+.count div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:78px;text-align:center}
+.count b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.8rem;line-height:1}
+.count span{font-size:.8rem;color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted);margin-top:10px}
+.checks{list-style:none;padding:0;margin:0}
+.checks li{padding:12px 0 12px 32px;border-bottom:1px solid var(--line);position:relative}
+.checks li::before{content:"✓";position:absolute;left:4px;top:12px;color:var(--sage);font-weight:700}
+.presenter{display:flex;gap:18px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:36px}
+.presenter small{color:var(--muted);display:block;margin-bottom:8px}
+
+/* Video placeholders */
+.video{aspect-ratio:16/9;background:var(--plum-soft);border-radius:12px;display:grid;place-items:center;color:var(--plum);font-weight:600;text-align:center;padding:16px}
+.video .play{font-size:2rem;display:block}
+.vids{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:18px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.vid .video{border-radius:0}
+.vid div.body{padding:16px 18px}
+.vid small{color:var(--plum);font-weight:600}
+.vid p{color:var(--muted);font-size:.95rem;margin:0}
+
+/* Flow */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 0 28px}
+.flow span{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-weight:600;font-size:.92rem}
+.flow i{color:var(--muted);font-style:normal}
+.flow span.end{background:var(--sage-soft);border-color:transparent;color:var(--sage)}
+
+/* Desplegables */
+details.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+details.step[open]{border-color:var(--plum)}
+details.step summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px 20px}
+details.step summary::-webkit-details-marker{display:none}
+.snum{width:34px;height:34px;border-radius:50%;background:var(--plum-soft);color:var(--plum);display:grid;place-items:center;font-weight:800;font-family:"Bricolage Grotesque",sans-serif}
+.stitle b{display:block;font-size:1.05rem}
+.stitle span{color:var(--muted);font-size:.93rem}
+.chev{transition:transform .2s;color:var(--muted);font-size:1.1rem}
+details[open] > summary .chev{transform:rotate(180deg)}
+.sbody{padding:0 20px 20px 70px}
+@media (max-width:560px){.sbody{padding:0 18px 18px}}
+.sbody ul{padding-left:1.2em;margin:0 0 1em}
+.sbody li{margin-bottom:6px}
+.callout{background:var(--sage-soft);border-radius:10px;padding:14px 16px;margin:14px 0}
+.script{border-left:3px solid var(--plum);padding:4px 0 4px 14px;margin:12px 0}
+.script b{display:block;font-size:.9rem;color:var(--plum)}
+.script p{margin:0;font-style:italic}
+.shapes{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0}
+.shapes div{background:var(--bg);border-radius:10px;padding:14px}
+figure{margin:16px 0}
+.shot{border:1px dashed var(--line);border-radius:10px;padding:28px 16px;text-align:center;color:var(--muted);background:var(--bg);font-size:.92rem}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:6px;font-style:italic}
+.empty{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:18px;color:var(--muted);text-align:center}
+
+/* ICP */
+.icp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:14px}
+.icp h4{color:var(--plum)}
+.icp p:last-child,.icp ul:last-child{margin-bottom:0}
+.icp ul{padding-left:1.2em}
+.icp li{margin-bottom:6px}
+.icp li.avoid{color:var(--warn)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.stats span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<section class="view active" id="resumen">
+  <div class="topbar"><span>Creado por Mario</span><span class="who"><span class="avatar">SA</span>Exclusivo para Sara Ariadna Pascual</span></div>
+  <h1>Sara, tus seguidoras ya quieren trabajar contigo. Les falta saber cómo.</h1><p class="lead" style="font-size:1.3rem;color:var(--ink);font-weight:600;margin-bottom:.6em">Te traigo el plan para terminar el año.</p>
+  <p class="lead">No tienes que instalar ni pagar nada. Todas las páginas, correos e ideas de vídeo que verás aquí parten de <strong>tu contenido actual, tu oferta y tu audiencia.</strong></p>
+  <div class="icp" style="margin-top:28px"><h4>Por qué ahora: el final de año</h4><p>Estos últimos meses son cuando tus seguidoras hacen balance. Miran atrás y se preguntan si este año se han cuidado como querían, si han llegado a sus objetivos de salud y de deporte o si, otra vez, se les ha escapado.</p><p>Y casi todas llegan a la misma conclusión: quieren cerrar el año sintiéndose bien y empezar el siguiente con un plan de verdad, no con otro propósito que se olvida en febrero.</p><p>Es el momento del año en que más mujeres están dispuestas a pedir ayuda. Si tu funnel está listo en las próximas semanas, llegas justo cuando te buscan: para que terminen 2026 cuidándose y empiecen 2027 contigo a su lado.</p><p><strong>Cada semana que pasa es una semana menos de esa ventana.</strong> Por eso conviene empezar ya, para tener tu funnel listo a tiempo.</p></div>
+  <div class="section-head"><span class="kicker">Entregables</span><h2>Esto es lo que he montado para ti</h2>
+  <p class="lead">Puedes abrirlas todas. Son páginas que funcionan, no maquetas, y te las quedas trabajemos juntos o no.</p></div>
+  <div class="cards">
+    <a class="card" href="#registro"><span class="num">01</span><h3>Landing con VSL</h3><p>La página a la que llega tu audiencia: un vídeo en el que explicas tu método y, debajo, el botón para reservar una llamada contigo o empezar directamente.</p><span class="go">Ver la landing ›</span></a>
+    <a class="card" href="#confirmacion"><span class="num">02</span><h3>Página de llamada reservada</h3><p>Donde aterrizan después de reservar. Qué pasa a partir de ahora y vídeos cortos para que lleguen a la llamada con las dudas resueltas.</p><span class="go">Ver la página ›</span></a>
+    <a class="card" href="#correos"><span class="num">03</span><h3>Secuencias de correo</h3><p>Para quien ve el vídeo y no reserva, recordatorios para que lleguen a la llamada y recuperación de quien no se presenta.</p><span class="go">Leer los correos ›</span></a>
+    <a class="card" href="#contenido"><span class="num">04</span><h3>Plan de contenido de 30 días</h3><p>Ideas de vídeo para los próximos 30 días, repartidas entre top, middle y bottom funnel. Basadas en los títulos que ya están funcionando en tu nicho.</p><span class="go">Ver plan de contenido ›</span></a>
+    <a class="card" href="#instagram"><span class="num">06</span><h3>Plan de crecimiento en Instagram</h3><p>Frecuencia de publicación, la palabra clave en comentarios que envía tu enlace por DM automáticamente, historias diarias, destacadas y reels fijados. El ritmo exacto de trabajo.</p><span class="go">Ver el plan de crecimiento ›</span></a>
+    <a class="card" href="#anuncios"><span class="num">07</span><h3>Anuncios de pago: funnel con VSL</h3><p>La configuración exacta de campaña, conjunto de anuncios y píxel en Meta, veinte creatividades entre vídeo y estáticas, y cómo medir el coste por llamada reservada.</p><span class="go">Ver el plan de anuncios ›</span></a>
+    <a class="card" href="#icp"><span class="num">08</span><h3>Investigación del cliente ideal (ICP)</h3><p>Todo lo que he recopilado sobre tu audiencia antes de escribir una sola palabra. A quién ayudas, qué problema resuelves, tu promesa, tus pruebas y tu método. Úsalo para afinar cada guion y correo que escribas a partir de ahora.</p><span class="go">Ver la investigación ›</span></a>
+  </div>
+  <div class="cta"><a class="btn" href="https://calendly.com/marioz-beklix/30min" target="_blank" rel="noopener">Reserva una llamada conmigo</a>
+  <p>Veinte minutos. Te enseño todo lo que he montado y te lo quedas pase lo que pase.</p><p class="note">Si el botón no se abre, copia este enlace: <span class="copy" style="user-select:all;word-break:break-all;color:var(--plum);font-weight:600">https://calendly.com/marioz-beklix/30min</span></p></div>
+  <p class="fine">Las cifras mencionadas corresponden a las personas citadas y no garantizan resultados. Este sitio no forma parte de Meta Platforms, Inc. ni de Google LLC, ni cuenta con su respaldo.</p>
+</section>
+<section class="view" id="registro">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Para mujeres de más de 30</span>
+  <h1>Tienes más de 30 y quieres perder grasa sin entrenar todos los días. En este vídeo te explico cómo</h1>
+  <p class="lead">Un vídeo corto con Sara Ariadna Pascual, entrenadora y nutricionista para mujeres. Al final puedes reservar una llamada o empezar directamente con su asesoría. Termina el año cuidándote y empieza 2027 con un plan que sí puedes mantener.</p>
+  <div class="video" style="margin:22px 0"><div><span class="play">►</span>Vídeo de presentación (VSL, por grabar)<br><small style="font-weight:400">Qué cambia en tu cuerpo después de los 30, cómo trabajo y cómo empezar.</small></div></div>
+  <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#registro">Reservar mi llamada ›</a><a class="btn" href="https://sariadnapascual.com/asesorias" target="_blank" rel="noopener" style="background:transparent;color:var(--plum);border:2px solid var(--plum)">Empezar ya ›</a></p>
+  <p class="note">Enlace para reservar la llamada: por añadir.</p>
+  <div class="section-head"><h2>Qué cuenta el vídeo</h2></div>
+  <ul class="checks">
+    <li>Por qué lo que te funcionaba antes de los 30 ya no te funciona</li>
+    <li>Cómo entrenar fuerza tres días a la semana sin agotarte</li>
+    <li>Cómo comer para tu metabolismo sin dietas extremas</li>
+    <li>Cómo trabajamos mi equipo y yo contigo</li>
+    <li>Para quién es y para quién no</li>
+  </ul>
+  <div class="section-head"><h2>Para quién es</h2></div>
+  <div class="icp"><ul><li>Tienes más de 30 y quieres perder grasa y ganar fuerza</li><li>No puedes o no quieres entrenar todos los días</li><li>Quieres que alguien revise lo que haces y te corrija</li><li class="avoid">Buscas un resultado rápido sin cambiar hábitos</li><li class="avoid">Quieres un plan genérico que puedas copiar de internet</li></ul></div>
+  <div class="presenter"><span class="avatar lg">SA</span><div><h4>Sara Ariadna Pascual</h4><small>Quién te acompaña</small><p>Sara Ariadna Pascual es entrenadora y nutricionista especializada en mujeres. Enseña a mujeres de más de 30 a perder grasa optimizando su metabolismo y trabaja con su equipo, @thesariadnateam. Su comunidad en Instagram supera los 289.000 seguidores.</p></div></div>
+</section>
+<section class="view" id="confirmacion">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Llamada reservada</span>
+  <h1>Ya tienes tu llamada con Sara</h1>
+  <p class="lead">Mira lo que pasa a partir de ahora y los vídeos de abajo antes de la llamada. Así llegas con tus dudas claras y aprovechas el tiempo.</p>
+  <div class="icp"><h4>Qué pasa ahora</h4><div class="piece"><b>1. Reservas tu llamada</b><p>Eliges día y hora.</p></div><div class="piece"><b>2. Llamada con el equipo de Sara</b><p>Te escuchan, te preguntan por tu punto de partida y te dicen qué plan te encaja.</p></div><div class="piece"><b>3. Empiezas</b><p>Si encaja, te mandan el plan y la primera revisión.</p></div></div>
+  <div class="section-head"><span class="kicker">Antes de la llamada</span><h2>Mira estos vídeos</h2>
+  <p class="lead">Te ayudan a llegar a la llamada sabiendo cómo trabajo y qué te voy a preguntar.</p></div>
+  <div class="vids">
+    <div class="vid"><div class="video"><span class="play">►</span></div><div class="body"><small>Antes de la llamada 01</small><h4>Así es la primera llamada conmigo</h4><p>Qué vas a vivir en la llamada, para que llegues tranquila.</p></div></div>
+    <div class="vid"><div class="video"><span class="play">►</span></div><div class="body"><small>Antes de la llamada 02</small><h4>Empezar fuerza después de los 30</h4><p>Qué cambia y por qué no necesitas entrenar todos los días.</p></div></div>
+    <div class="vid"><div class="video"><span class="play">►</span></div><div class="body"><small>Antes de la llamada 03</small><h4>Esto cuesta trabajar conmigo</h4><p>Los planes, qué incluye cada uno y cuál te encaja.</p></div></div>
+  </div>
+</section>
+<section class="view" id="correos">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">3 secuencias</span>
+  <h1>Secuencias de correo del funnel</h1>
+  <p class="lead">Tres secuencias: para quien ve el vídeo y no reserva, para quien reserva y tiene que llegar a la llamada, y para quien no se presenta. Cada correo tiene un objetivo concreto y lleva indicado el día en que se envía.</p>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Quien ve el vídeo y no reserva</b><span>Respuestas a sus dudas y un caso real</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="empty">Contenido de los correos por añadir.</div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Recordatorios de la llamada</b><span>Desde que reserva hasta el día de la llamada</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="empty">Contenido de los correos por añadir.</div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Recuperar a quien no se presenta</b><span>Para volver a agendar sin presionar</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="empty">Contenido de los correos por añadir.</div></div>
+  </details>
+</section>
+<section class="view" id="contenido">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Próximos 30 días</span>
+  <h1>Plan de contenido de 30 días</h1>
+  <p class="lead">Seis piezas en cuatro semanas, en Instagram. Los Reels traen mujeres nuevas de más de 30. El middle funnel enseña tu método con ejemplos que cualquiera puede probar. La última es la que nadie más hace en tu nicho: decir el precio.</p>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Top funnel: que te descubran</b><span>3 piezas para traer gente nueva</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="piece"><b>«Una clienta de 55 años que nunca había cogido una pesa. Así empezó el día 1»</b><span class="fmt">Reel de 35 s</span><p>El primer día real de una clienta que empezó de cero. Enseña que nunca es tarde, sin prometer resultados.</p><p class="cta"><strong>Llamada a la acción:</strong> ninguna.</p></div><div class="piece"><b>«No es la edad. Es que vas floja»</b><span class="fmt">Reel de 25 s</span><p>La prueba de las últimas repeticiones: si acabas pudiendo hacer seis más, no cuenta.</p><p class="cta"><strong>Llamada a la acción:</strong> ninguna.</p></div><div class="piece"><b>«La flacidez después de perder peso no se arregla con más cardio»</b><span class="fmt">Reel de 25 s</span><p>Fuerza frente a cardio en una idea, con una clienta real.</p><p class="cta"><strong>Llamada a la acción:</strong> ninguna.</p></div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Middle funnel: que confíen en ti</b><span>2 piezas para demostrar tu método</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="piece"><b>«Empezar fuerza a los 50 sin haber cogido una pesa: 3 ejercicios, 3 series, 3-5 repeticiones»</b><span class="fmt">Carrusel de 8 diapositivas</span><p>Una rutina sencilla para empezar, ejercicio por ejercicio. Se guarda y se manda a una amiga.</p><p class="cta"><strong>Llamada a la acción:</strong> guardar y palabra clave en el texto.</p></div><div class="piece"><b>«Flacidez después de perder peso: lo que se puede cambiar y lo que no»</b><span class="fmt">Reel de 45 s</span><p>Lo que depende del entrenamiento y lo que no, sin promesas.</p><p class="cta"><strong>Llamada a la acción:</strong> palabra clave por DM.</p></div></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Bottom funnel: que te compren</b><span>1 pieza para convertir</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><div class="piece"><b>«Esto cuesta trabajar conmigo y esto incluye (sí, pongo el precio)»</b><span class="fmt">Reel de 40 s</span><p>Tus planes con su precio y qué incluye cada uno. Casi nadie en tu nicho lo hace, y quita la duda antes de la llamada.</p><p class="cta"><strong>Llamada a la acción:</strong> tu landing con el vídeo.</p></div></div>
+  </details>
+  <div class="icp"><h4>Calendario</h4><div style="overflow-x:auto"><table class="cal"><tr><th>Semana</th><th>Qué sale</th></tr><tr><td>1</td><td>Reels 1 y 2</td></tr><tr><td>2</td><td>Reel 3 y carrusel 4</td></tr><tr><td>3</td><td>Reel 5</td></tr><tr><td>4</td><td>Reel 6, apoyado con Stories</td></tr></table></div></div>
+  <div class="icp"><h4>Qué miras tú</h4><p>Formularios de asesoría por semana, llamadas reservadas, mensajes con palabra clave y guardados por carrusel.</p></div>
+  <p class="note">Ninguna pieza promete resultados de salud. Se habla de hábitos, proceso y cómo se siente ella.</p>
+<style>.piece{border-top:1px solid var(--line);padding:14px 0}.piece:first-child{border-top:0;padding-top:0}.piece b{display:block;font-size:1.02rem}.piece .fmt{display:block;color:var(--plum);font-weight:600;font-size:.9rem;margin:2px 0 8px}.piece p{margin:0 0 6px}.piece .cta{color:var(--muted);font-size:.93rem}table.cal{border-collapse:collapse;width:100%}table.cal th,table.cal td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}table.cal th{color:var(--muted);font-weight:600;font-size:.9rem}</style>
+</section>
+<section class="view" id="instagram">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Plan de crecimiento en Instagram</span>
+  <h1>Cómo hacerlo crecer</h1>
+  <p class="lead">Contenido, palabras clave en comentarios e historias que llevan a tu landing. Esto es lo que ponemos en marcha cuando el funnel esté activo.</p>
+  <div class="flow"><span>Contenido en Instagram</span><i>→</i><span>Landing con VSL</span><i>→</i><span>Llamada o compra directa</span><i>→</i><span class="end">Programa para mujeres de +30</span></div>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Publica 3 vídeos de top funnel a la semana</b><span>Te presentan a ti, la oportunidad y el método</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Cada uno vende una de estas tres cosas: <strong>a ti como mentora</strong>, <strong>la nueva oportunidad</strong> o <strong>tu método</strong>.</p>
+      <p>Todos los vídeos terminan con una llamada a comentar. Pídeles que comenten FUERZA y recibirán el enlace a tu vídeo.</p>
+      <ul><li>ManyChat detecta la palabra clave y envía el enlace por DM automáticamente</li>
+      <li>El enlace lleva a <strong style="word-break:break-all">https://sariadnapascual.com/asesorias</strong></li>
+      <li>Además, los comentarios aumentan el alcance, así que la palabra clave te sirve para dos cosas</li></ul>
+      <div class="callout"><strong>Opcional, pero merece la pena.</strong> Contrata a una persona que gestione los DM, o usa el setter con IA de Boosend, para cualificar al lead después de enviar el enlace. Unas pocas preguntas para saber en qué punto está y, si encaja, la invitación a solicitar plaza.</div>
+      </div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Arregla la bio y el enlace</b><span>Para que el enlace se abra donde debe</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>La bio apunta a tu landing con el vídeo: <strong style="word-break:break-all">https://sariadnapascual.com/asesorias</strong></p>
+      <ul><li>Pásalo por <strong>linktw.in</strong> o <strong>taap.it</strong> para que se abra en el navegador del móvil en lugar del navegador interno de Instagram</li></ul></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Publica 1 vídeo de middle funnel a la semana</b><span>El método y los errores que siguen cometiendo</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Enseña <strong>tu método</strong> y señala los errores que tu clienta ideal está cometiendo ahora mismo.</p><p>Misma palabra clave: FUERZA las lleva a tu landing a través de ManyChat.</p></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">4</span><span class="stitle"><b>Publica 1 vídeo de bottom funnel a la semana</b><span>Resultados de clientas o entrevista a una clienta</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Uno a la semana. Un resultado, cómo lo consiguió o una entrevista con ella. Este es el que convence a quien lleva semanas viéndote.</p></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">5</span><span class="stitle"><b>Historias diarias con llamada a la acción directa</b><span>Una cada día, siempre con un objetivo</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Cada historia sigue uno de estos dos formatos, y los dos terminan en el mismo sitio.</p>
+      <div class="shapes"><div><strong>Formato 1</strong><br>Resultado personal, adelanto de tu método y llamada directa a ver el vídeo y reservar</div>
+      <div><strong>Formato 2</strong><br>Resultado de una clienta, adelanto de tu método y llamada directa a ver el vídeo y reservar</div></div>
+      <p>El sticker de enlace lleva siempre a <strong style="word-break:break-all">https://sariadnapascual.com/asesorias</strong>.</p></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">6</span><span class="stitle"><b>Crea 3 historias destacadas</b><span>Para que quien entra a tu perfil por primera vez también se anime</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul><li><strong>Resultados de clientas.</strong> Las pruebas, bien a la vista</li><li><strong>Tu historia y tu transformación.</strong> Es lo que te presenta como mentora</li><li><strong>Tu método.</strong> Qué es y por qué funciona tan bien</li></ul></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">7</span><span class="stitle"><b>Fija 3 reels</b><span>Los tres que debería ver primero quien llega a tu perfil</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul><li>Tu historia, tu propio resultado, la transformación. Te presenta como mentora</li><li>Un desglose de <strong>tu método</strong> y por qué funciona</li><li>Tu mejor caso de éxito o testimonio de clienta</li></ul></div>
+  </details>
+</section>
+<section class="view" id="anuncios">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Anuncios de pago, funnel con VSL</span>
+  <h1>Anuncios de pago</h1>
+  <p class="lead">Cuando el funnel ya funcione sin anuncios, así es como llenas tu agenda cuando quieras: anuncios de Meta que llevan directamente a tu landing con el vídeo.</p>
+  <details class="step" open>
+    <summary><span class="snum">1</span><span class="stitle"><b>Campaña y presupuesto</b><span>ABO, objetivo de clientes potenciales, Advantage+ activado</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Aquí lo que buscas son llamadas reservadas, así que el píxel hace el trabajo y Advantage+ ayuda en vez de estorbar.</p>
+      <ul><li>Campaña ABO en el Administrador de anuncios de Meta</li><li>Objetivo: <strong>clientes potenciales</strong></li><li>Segmentación Advantage+ <strong>ACTIVADA</strong></li><li>Empieza con <strong>100 $ al día</strong></li></ul>
+      <figure><div class="shot">Captura de pantalla de la configuración de campaña</div><figcaption>Campaña ABO, objetivo de clientes potenciales, Advantage+ activado</figcaption></figure></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">2</span><span class="stitle"><b>Conjunto de anuncios</b><span>Visitas al sitio web, optimizado para la llamada reservada</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><p>Selecciona tu píxel y optimiza para una <strong>conversión personalizada</strong> de llamadas reservadas. Mide el <strong>coste por llamada reservada</strong> desde el primer día.</p>
+      <ul><li>La segmentación Advantage+ se queda <strong>ACTIVADA</strong> también aquí</li><li>Intereses relacionados con tu mercado, <strong>un interés por conjunto de anuncios</strong></li></ul>
+      <figure><div class="shot">Captura de pantalla de la configuración del conjunto de anuncios</div><figcaption>Conjunto de anuncios optimizado para la llamada reservada</figcaption></figure></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">3</span><span class="stitle"><b>Creatividades</b><span>Veinte por conjunto de anuncios, repartidas a partes iguales</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul><li><strong>Diez anuncios en vídeo.</strong> Graba en 9:16 vertical para Instagram y en 16:9 panorámico para Facebook. Cada uno o bien presenta una nueva oportunidad o hueco en el mercado sobre el que hay que actuar rápido, o bien señala un error habitual de tu clienta ideal y adelanta la nueva solución</li>
+      <li><strong>Diez anuncios de imagen estática.</strong> Créalos con herramientas de IA como Google AI Studio. Prepara varios formatos: 1:1 cuadrado y 9:16 vertical</li></ul>
+      <p>Todos los anuncios buscan lo mismo: <strong>que vean el vídeo y reserven la llamada</strong>.</p></div>
+  </details>
+  <details class="step">
+    <summary><span class="snum">4</span><span class="stitle"><b>Que no se escape nadie</b><span>Dos automatizaciones listas antes de gastar en anuncios</span></span><span class="chev">⌄</span></summary>
+    <div class="sbody"><ul><li>Los recordatorios se activan en cuanto reservan y duran hasta la llamada, para que se presenten</li>
+      <li>La secuencia para quien ve el vídeo y no reserva ya está montada, así que nadie se queda a medias</li></ul>
+      <p>Landing con el vídeo: <strong style="word-break:break-all">https://sariadnapascual.com/asesorias</strong></p></div>
+  </details>
+</section>
+<section class="view" id="icp">
+  <a class="back" href="#resumen">← Volver al resumen</a>
+  <span class="kicker">Sacado de tu perfil y tu funnel</span>
+  <h1>Lo que he aprendido de tu audiencia</h1>
+  <p class="lead">Todas las páginas y correos parten de aquí. Si algo de lo que hay abajo no es correcto, dímelo y rehago los textos con la corrección.</p>
+  <div class="icp"><h4>Quién te compra</h4><p>Son mujeres de más de 30 años que quieren perder grasa y sentirse bien con su cuerpo. Tienen trabajo, familia y poco tiempo, y ya han probado muchas cosas.</p></div>
+  <div class="icp"><h4>Su mayor problema</h4><p>Están hartas de hacer dietas y entrenar sin ver resultados. Sienten que su cuerpo ya no responde como antes y no entienden por qué.</p></div>
+  <div class="icp"><h4>Por lo que están dispuestas a pagar</h4><p>Quieren perder grasa de forma sostenible, entender su metabolismo y tener a alguien que les diga exactamente qué hacer, sin dietas extremas.</p></div>
+  <div class="icp"><h4>Qué tienes que enseñar para que te compren</h4><ul><li>Muestra transformaciones reales de mujeres de más de 30</li><li>Explica el método de forma sencilla y cercana</li><li>Destaca el acompañamiento del equipo</li><li>Muestra tu formación como entrenadora y nutricionista</li><li class="avoid">Evitar: imágenes que idealicen cuerpos inalcanzables o hagan sentir culpa</li><li class="avoid">Evitar: hablar de restricción o sacrificio como solución</li></ul></div>
+  <div class="icp"><h4>Lo que les cuesta intentarlo por su cuenta</h4><p>Por su cuenta siguen saltando de dieta en dieta, comiendo cada vez menos y frustrándose cada vez más. Pierden años intentando lo que ya no funciona para su metabolismo.</p></div>
+  <div class="stats"><span>Su perfil de Instagram</span><span>Su página de asesorías</span><span>289.000 seguidores</span></div>
+</section>
+<p class="fine"><strong>Aviso sobre ingresos.</strong> Los resultados mostrados no son lo habitual ni garantizan resultados futuros. Cualquier cifra mencionada corresponde a las personas citadas y depende del esfuerzo, el capital, la experiencia y las condiciones del mercado. Nada de lo aquí expuesto constituye asesoramiento financiero.<br><br>Este sitio no forma parte del sitio web de Facebook ni de Meta Platforms, Inc., ni cuenta con su respaldo. Facebook e Instagram son marcas registradas de Meta Platforms, Inc. Este sitio no forma parte de Google LLC ni de YouTube, ni cuenta con su respaldo. Google y YouTube son marcas registradas de Google LLC.<br><br>Creado para Sara Ariadna Pascual</p>
+</div>
+<script>
+(function(){
+  var ids=["resumen", "registro", "confirmacion", "correos", "contenido", "instagram", "anuncios", "icp"];
+  function show(){var id=(location.hash||"#resumen").slice(1);if(ids.indexOf(id)<0)id="resumen";
+    ids.forEach(function(v){document.getElementById(v).classList.toggle("active",v===id)});window.scrollTo(0,0);}
+  window.addEventListener("hashchange",show);show();
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="http"]');if(!a)return;e.preventDefault();var u=a.href,w=null;
+    try{w=window.open(u,"_blank","noopener");}catch(x){}
+    if(!w){try{window.top.location.href=u;}catch(x){try{location.href=u;}catch(y){}}}});
+  function mp(ms){var p={};new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",weekday:"short",hour12:false}).formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value});return p;}
+  function off(ms){var p=mp(ms);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour%24,+p.minute,+p.second)-Math.floor(ms/1000)*1000;}
+  function target(){var now=Date.now(),p=mp(now),wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday],add=(4-wd+7)%7;
+    var l=Date.UTC(+p.year,+p.month-1,+p.day+add,20,0,0),t=l-off(l);
+    if(t<=now){l=Date.UTC(+p.year,+p.month-1,+p.day+add+7,20,0,0);t=l-off(l);}return t;}
+  var end=target(),els={};["d","h","m","s"].forEach(function(k){els[k]=document.querySelector('[data-c="'+k+'"]')});
+  function pad(n){return String(n).padStart(2,"0")}
+  function tick(){if(!els.d)return;var r=end-Date.now();if(r<=0){end=target();r=end-Date.now();}var s=Math.floor(r/1000);
+    els.d.textContent=pad(Math.floor(s/86400));els.h.textContent=pad(Math.floor(s%86400/3600));
+    els.m.textContent=pad(Math.floor(s%3600/60));els.s.textContent=pad(s%60);}
+  tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
